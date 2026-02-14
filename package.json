@@ -7,12 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "format": "prettier --write '**/*.{ts,tsx,cts,mts,js,jsx,cjs,mjs,json}'",
+    "format": "prettier --write '**/*.{ts,tsx,cts,mts,js,jsx,cjs,mjs,json,css,scss}'",
     "type-check": "tsc --noEmit",
     "clean": "pnpm lint --fix && pnpm format && pnpm type-check",
     "db:reset": "prisma generate --no-hints && prisma db push --force-reset"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "@prisma/adapter-pg": "^7.3.0",
     "@prisma/client": "^7.3.0",
     "better-auth": "^1.4.18",
