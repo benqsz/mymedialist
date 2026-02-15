@@ -1,5 +1,7 @@
 import './_styles/index.css'
 
+
+import { Providers } from '@frontend/_components/providers'
 import type { Metadata } from 'next'
 import { JetBrains_Mono } from 'next/font/google'
 
@@ -14,8 +16,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={jetbrainsMono.variable}>
-      <body>{children}</body>
+    <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

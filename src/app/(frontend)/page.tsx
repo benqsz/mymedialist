@@ -1,10 +1,10 @@
-import { Button } from '@frontend/_components/ui/button'
+import { ThemeToggle } from '@frontend/_components/ui/theme-toggle'
 
 export default function HomePage() {
   return (
     <main>
       home page
-      <Button>button</Button>
+      <ThemeToggle />
     </main>
   )
 }
