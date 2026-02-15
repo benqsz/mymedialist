@@ -1,6 +1,5 @@
 import './_styles/index.css'
 
-
 import { Providers } from '@frontend/_components/providers'
 import type { Metadata } from 'next'
 import { JetBrains_Mono } from 'next/font/google'
