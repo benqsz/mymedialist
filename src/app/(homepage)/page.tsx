@@ -1,14 +1,14 @@
-import { ThemeToggle } from '@frontend/_components/ui/theme-toggle'
-
+import Container from '@/app/_components/ui/container'
+import ThemeToggle from '@/app/(homepage)/_components/theme-toggle'
 import { sessionCheck } from '@/auth/utils'
 
 export default async function HomePage() {
   await sessionCheck()
 
   return (
-    <main>
+    <Container as="main">
       home page
       <ThemeToggle />
-    </main>
+    </Container>
   )
 }
