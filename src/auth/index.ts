@@ -9,8 +9,8 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     disableSignUp: env.BETTER_AUTH_DISABLE_REGISTER,
-    minPasswordLength: env.BETTER_AUTH_MIN_PASSWORD,
-    maxPasswordLength: env.BETTER_AUTH_MAX_PASSWORD,
+    minPasswordLength: env.NEXT_PUBLIC_BETTER_AUTH_MIN_PASSWORD,
+    maxPasswordLength: env.NEXT_PUBLIC_BETTER_AUTH_MAX_PASSWORD,
   },
   database: prismaAdapter(db, {
     provider: 'postgresql',

@@ -3,26 +3,24 @@
 import { Button } from '@frontend/_components/ui/button'
 import { Input } from '@frontend/_components/ui/input'
 import { Label } from '@frontend/_components/ui/label'
-import { signUpSchema } from '@frontend/(auth)/_constants'
-import signUpAction from '@frontend/(auth)/sign-up/_actions/sign-up'
+import { signInSchema } from '@frontend/(auth)/_constants'
+import signInAction from '@frontend/(auth)/sign-in/_actions/sign-in'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { redirect } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-export default function SignUpForm() {
-  const form = useForm<z.infer<typeof signUpSchema>>({
-    resolver: zodResolver(signUpSchema),
+export default function SignInForm() {
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
-      username: '',
       email: '',
       password: '',
-      rePassword: '',
     },
   })
 
-  const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
-    const { success, message } = await signUpAction(data)
+  const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+    const { success, message } = await signInAction(data)
     if (success) {
       redirect('/')
     }
@@ -34,10 +32,6 @@ export default function SignUpForm() {
       className="space-y-6 *:space-y-2"
       onSubmit={form.handleSubmit(onSubmit)}
     >
-      <div>
-        <Label htmlFor="username">Username</Label>
-        <Input id="username" required {...form.register('username')} />
-      </div>
       <div>
         <Label htmlFor="email">Email</Label>
         <Input id="email" type="email" required {...form.register('email')} />
@@ -51,22 +45,13 @@ export default function SignUpForm() {
           {...form.register('password')}
         />
       </div>
-      <div>
-        <Label htmlFor="rePassword">Confirm Password</Label>
-        <Input
-          id="rePassword"
-          type="password"
-          required
-          {...form.register('rePassword')}
-        />
-      </div>
       {form.formState.errors.root && (
         <p className="text-xs text-center text-destructive">
           {form.formState.errors.root.message}
         </p>
       )}
       <Button type="submit" className="w-full">
-        Register
+        Login
       </Button>
     </form>
   )
