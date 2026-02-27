@@ -2,12 +2,12 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { redirect } from 'next/navigation'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Button } from '@/app/_components/ui/button'
+import { Field, FieldError, FieldLabel } from '@/app/_components/ui/field'
 import { Input } from '@/app/_components/ui/input'
-import { Label } from '@/app/_components/ui/label'
 import { signUpSchema } from '@/app/(auth)/_constants'
 import signUpAction from '@/app/(auth)/sign-up/_actions/sign-up'
 
@@ -31,42 +31,83 @@ export default function SignUpForm() {
   }
 
   return (
-    <form
-      className="space-y-6 *:space-y-2"
-      onSubmit={form.handleSubmit(onSubmit)}
-    >
-      <div>
-        <Label htmlFor="username">Username</Label>
-        <Input id="username" required {...form.register('username')} />
-      </div>
-      <div>
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" required {...form.register('email')} />
-      </div>
-      <div>
-        <Label htmlFor="password">Password</Label>
-        <Input
-          id="password"
-          type="password"
-          required
-          {...form.register('password')}
-        />
-      </div>
-      <div>
-        <Label htmlFor="rePassword">Confirm Password</Label>
-        <Input
-          id="rePassword"
-          type="password"
-          required
-          {...form.register('rePassword')}
-        />
-      </div>
+    <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+      <Controller
+        name="username"
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+            <Input
+              {...field}
+              id={field.name}
+              aria-invalid={fieldState.invalid}
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Controller
+        name="email"
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+            <Input
+              {...field}
+              id={field.name}
+              aria-invalid={fieldState.invalid}
+              type="email"
+              autoComplete="email"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Controller
+        name="password"
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+            <Input
+              {...field}
+              id={field.name}
+              aria-invalid={fieldState.invalid}
+              type="password"
+              autoComplete="current-password"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Controller
+        name="rePassword"
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
+            <Input
+              {...field}
+              id={field.name}
+              aria-invalid={fieldState.invalid}
+              type="password"
+              autoComplete="new-password"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
       {form.formState.errors.root && (
         <p className="text-xs text-center text-destructive">
           {form.formState.errors.root.message}
         </p>
       )}
-      <Button type="submit" className="w-full">
+      <Button
+        type="submit"
+        className="w-full"
+        isLoading={form.formState.isSubmitting}
+      >
         Register
       </Button>
     </form>

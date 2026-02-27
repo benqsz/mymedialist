@@ -1,8 +1,12 @@
+'use client'
+
 import { cva, type VariantProps } from 'class-variance-authority'
 import { Slot } from 'radix-ui'
 import type { ComponentProps } from 'react'
 
 import { cn } from '@/app/_lib/utils'
+
+import { Spinner } from './spinner'
 
 const buttonVariants = cva(
   "cursor-pointer focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-md border border-transparent bg-clip-padding text-xs/relaxed font-medium focus-visible:ring-2 aria-invalid:ring-2 [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
@@ -39,17 +43,20 @@ const buttonVariants = cva(
   },
 )
 
-function Button({
-  className,
-  variant = 'default',
-  size = 'default',
-  asChild = false,
-  ...props
-}: ComponentProps<'button'> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
-  }) {
+type Props = {
+  asChild?: boolean
+  isLoading?: boolean
+} & ComponentProps<'button'> &
+  VariantProps<typeof buttonVariants>
+
+function Button(props: Props) {
+  const { asChild, variant, size, className, isLoading, children, ...rest } =
+    props
   const Comp = asChild ? Slot.Root : 'button'
+
+  if (isLoading !== undefined && asChild) {
+    throw new Error('Loading state is not supported when using asChild')
+  }
 
   if (
     size === 'icon' ||
@@ -59,18 +66,21 @@ function Button({
   ) {
     if (!props['aria-label'])
       throw new Error(
-        'Icon buttons must have an aria-label for accessibility purposes.',
+        'Icon buttons must have an aria-label for accessibility purposes',
       )
   }
 
   return (
     <Comp
+      {...rest}
       data-slot="button"
       data-variant={variant}
       data-size={size}
       className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
+      disabled={isLoading || rest.disabled}
+    >
+      {isLoading ? <Spinner /> : children}
+    </Comp>
   )
 }
 
