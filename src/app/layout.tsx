@@ -1,16 +1,9 @@
-
-
-
 import './_styles/index.css'
 
 import type { Metadata } from 'next'
 import { JetBrains_Mono } from 'next/font/google'
 
 import { Providers } from '@/app/_components/providers'
-
-
-
-
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],

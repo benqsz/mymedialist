@@ -7,6 +7,7 @@ const eslintConfig = defineConfig([
   ...nextTs,
   globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
   // temporary workaround for eslint v10
+  // https://github.com/vercel/next.js/issues/89764
   {
     settings: {
       react: { version: '19' },

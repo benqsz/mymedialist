@@ -1,6 +1,8 @@
 {
   "name": "mymedialist",
-  "version": "0.1.0",
+  "author": "benqsz <github.com/benqsz>",
+  "license": "MIT",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
