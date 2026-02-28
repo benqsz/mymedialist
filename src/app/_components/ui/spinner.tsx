@@ -1,4 +1,4 @@
-import { SpinnerIcon } from '@phosphor-icons/react'
+import { SpinnerIcon } from '@phosphor-icons/react/ssr'
 import type { ComponentProps } from 'react'
 
 import { cn } from '@/app/_lib/utils'

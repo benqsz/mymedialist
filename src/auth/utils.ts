@@ -4,15 +4,20 @@ import { redirect as nextRedirect } from 'next/navigation'
 import { auth } from '@/auth'
 import { SIGN_IN_PATH } from '@/auth/constants'
 
-export async function sessionCheck(redirect: boolean = true) {
+export async function sessionCheck() {
   const session = await auth.api.getSession({
     headers: await headers(),
   })
 
   if (!session) {
-    if (redirect) nextRedirect(SIGN_IN_PATH)
-    return null
+    nextRedirect(SIGN_IN_PATH)
   }
 
   return session
+}
+
+export async function getSession() {
+  return await auth.api.getSession({
+    headers: await headers(),
+  })
 }
