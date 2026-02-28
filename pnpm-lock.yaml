@@ -59,6 +59,9 @@ importers:
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
+      wretch:
+        specifier: ^3.0.6
+        version: 3.0.6
       zod:
         specifier: ^4.3.6
         version: 4.3.6
@@ -3367,6 +3370,10 @@ packages:
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
+
+  wretch@3.0.6:
+    resolution: {integrity: sha512-qshuQ0s5973Mu9mL5PG6QYG/bD0jihX9bovq7jgGE8r6ndH+JPOzzxihh/gaanKKsrFvvIdZ+KN4BoFyTj4PWg==}
+    engines: {node: '>=22'}
 
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
@@ -6828,6 +6835,8 @@ snapshots:
       isexe: 2.0.0
 
   word-wrap@1.2.5: {}
+
+  wretch@3.0.6: {}
 
   xtend@4.0.2: {}
 

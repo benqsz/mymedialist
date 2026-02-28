@@ -1,6 +1,30 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@layer utilities {
+  @keyframes scroll-left {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-marquee {
+    animation: scroll-left 30s linear infinite;
+  }
+
+  /* Only animate if text overflows - uses JavaScript to apply class */
+  [data-overflow='autoscroll'][data-overflowing='true'] {
+    animation: scroll-left 30s linear infinite;
+  }
+
+  [data-overflow='autoscroll'][data-overflowing='false'] {
+    animation: none;
+  }
+}
+
 /*#region theme*/
 
 :root {

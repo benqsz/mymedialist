@@ -1,6 +1,7 @@
 import { UserIcon } from '@phosphor-icons/react/ssr'
 import Link from 'next/link'
 
+import { zIndexes } from '@/app/_lib/constants'
 import { Button } from '@/app/_components/ui/button'
 import Container from '@/app/_components/ui/container'
 import {
@@ -17,7 +18,12 @@ export default async function Header() {
   const session = await getSession()
 
   return (
-    <header className="sticky top-0 w-full h-16">
+    <header
+      className="sticky top-0 w-full h-16 bg-background/30 backdrop-blur-2xl"
+      style={{
+        zIndex: zIndexes.header,
+      }}
+    >
       <Container className="flex items-center h-full justify-between">
         <Link href="/public">mymedialist</Link>
         {session ? (
