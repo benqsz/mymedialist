@@ -4,3 +4,10 @@ export const SortEnum = {
 } as const
 
 export type Sort = typeof SortEnum
+
+export type Pagination = {
+  currentPage: number
+  totalPages: number
+  hasNextPage: boolean
+  hasPreviousPage: boolean
+}

@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'myanimelist.net',
+        port: '',
+        pathname: '/images/**',
+      },
     ],
   },
 }

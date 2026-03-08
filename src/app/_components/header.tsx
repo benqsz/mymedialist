@@ -25,7 +25,7 @@ export default async function Header() {
       }}
     >
       <Container className="flex items-center h-full justify-between">
-        <Link href="/public">mymedialist</Link>
+        <Link href="/">mymedialist</Link>
         {session ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
