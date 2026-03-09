@@ -3,7 +3,7 @@ export const SortEnum = {
   ASC: 'asc',
 } as const
 
-export type Sort = typeof SortEnum
+export type Sort = (typeof SortEnum)[keyof typeof SortEnum]
 
 export type Pagination = {
   currentPage: number

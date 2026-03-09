@@ -5,6 +5,11 @@ export const zIndexes = {
 export const searchParamKeys = {
   page: 'page',
   query: 'search',
+  sort: 'sort',
+  animeOrderBy: 'animeOrderBy',
+  animeType: 'animeType',
+  animeStatus: 'animeStatus',
+  animeRating: 'animeRating',
 } as const
 
 export const limitPerPage = {

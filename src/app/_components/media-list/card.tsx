@@ -16,6 +16,7 @@ export default function MediaCard({ id, type, title, image }: MediaItem) {
           alt={title}
           fill
           className="object-contain object-top"
+          sizes="(max-width: 640px) 100vw, 320px"
         />
       </div>
       <div className="h-8 flex-center px-1 overflow-hidden">

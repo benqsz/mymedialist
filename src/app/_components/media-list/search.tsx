@@ -11,21 +11,13 @@ import { Input } from '@/app/_components/ui/input'
 export default function MediaSearch() {
   const [search, setSearch] = useQueryState(
     searchParamKeys.query,
-    parseAsString
-      .withOptions({
-        shallow: false,
-      })
-      .withDefault(''),
+    parseAsString.withDefault(''),
   )
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setPage] = useQueryState(
     searchParamKeys.page,
-    parseAsInteger
-      .withOptions({
-        shallow: true,
-      })
-      .withDefault(1),
+    parseAsInteger.withDefault(1),
   )
 
   return (
@@ -40,13 +32,15 @@ export default function MediaSearch() {
           }).finally(() => setPage(1))
         }
       />
-      <Button
-        variant="outline"
-        aria-label="Clear search"
-        onClick={() => setSearch('').finally(() => setPage(1))}
-      >
-        <XIcon />
-      </Button>
+      {search && (
+        <Button
+          variant="outline"
+          aria-label="Clear search"
+          onClick={() => setSearch('').finally(() => setPage(1))}
+        >
+          <XIcon />
+        </Button>
+      )}
     </ButtonGroup>
   )
 }

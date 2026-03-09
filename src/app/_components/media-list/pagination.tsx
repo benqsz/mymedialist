@@ -19,7 +19,6 @@ export default function MediaPagination(props: PaginationProps) {
   const [page, setPage] = useQueryState(
     'page',
     parseAsInteger.withDefault(currentPage).withOptions({
-      shallow: false,
       scroll: true,
     }),
   )

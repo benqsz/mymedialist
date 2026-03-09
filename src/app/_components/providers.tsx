@@ -16,7 +16,13 @@ export function Providers({ children }: Props) {
       enableSystem
       disableTransitionOnChange
     >
-      <NuqsAdapter>{children}</NuqsAdapter>
+      <NuqsAdapter
+        defaultOptions={{
+          shallow: false,
+        }}
+      >
+        {children}
+      </NuqsAdapter>
     </NextThemesProvider>
   )
 }
