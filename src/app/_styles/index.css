@@ -248,6 +248,10 @@
 /*#endregion*/
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
   }

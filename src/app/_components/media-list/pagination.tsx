@@ -20,6 +20,7 @@ export default function MediaPagination(props: PaginationProps) {
     'page',
     parseAsInteger.withDefault(currentPage).withOptions({
       shallow: false,
+      scroll: true,
     }),
   )
 

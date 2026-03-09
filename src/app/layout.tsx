@@ -16,7 +16,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={jetbrainsMono.variable}
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+    >
       <body>
         <Providers>{children}</Providers>
       </body>
