@@ -1,7 +1,8 @@
 'use client'
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import type { ReactNode } from 'react'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { type ReactNode } from 'react'
 
 type Props = {
   children: ReactNode
@@ -15,7 +16,7 @@ export function Providers({ children }: Props) {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <NuqsAdapter>{children}</NuqsAdapter>
     </NextThemesProvider>
   )
 }

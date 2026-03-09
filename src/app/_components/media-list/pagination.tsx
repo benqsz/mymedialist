@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname, useSearchParams } from 'next/navigation'
+import { parseAsInteger, useQueryState } from 'nuqs'
 import { Fragment, useMemo } from 'react'
 
 import {
@@ -16,60 +16,53 @@ import type { Pagination as PaginationProps } from '@/types/common'
 
 export default function MediaPagination(props: PaginationProps) {
   const { currentPage, totalPages, hasNextPage, hasPreviousPage } = props
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-
-  const createPageLink = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString())
-    if (page === 1) {
-      params.delete('page')
-    } else {
-      params.set('page', page.toString())
-    }
-    const query = params.toString()
-    return query ? `${pathname}?${query}` : pathname
-  }
+  const [page, setPage] = useQueryState(
+    'page',
+    parseAsInteger.withDefault(currentPage).withOptions({
+      shallow: false,
+    }),
+  )
 
   const visiblePages = useMemo(() => {
     if (totalPages <= 5) {
       return Array.from({ length: totalPages }, (_, i) => i + 1)
     }
-    if (currentPage <= 3) {
+    if (page <= 3) {
       return [1, 2, 3, 4, totalPages]
     }
-    if (currentPage >= totalPages - 2) {
+    if (page >= totalPages - 2) {
       return [1, totalPages - 3, totalPages - 2, totalPages - 1, totalPages]
     }
-    return [1, currentPage - 1, currentPage, currentPage + 1, totalPages]
-  }, [currentPage, totalPages])
+    return [1, page - 1, page, page + 1, totalPages]
+  }, [page, totalPages])
 
   return (
     <Pagination>
       <PaginationContent>
         {hasPreviousPage && (
           <PaginationItem>
-            <PaginationPrevious href={createPageLink(currentPage - 1)} />
+            <PaginationPrevious onClick={() => setPage(page - 1)} />
           </PaginationItem>
         )}
 
-        {visiblePages.map((page, index) => {
+        {visiblePages.map((visiblePage, index) => {
           const previousPage = visiblePages[index - 1]
           const shouldShowEllipsis =
-            previousPage !== undefined && page - previousPage > 1
+            previousPage !== undefined && visiblePage - previousPage > 1
 
           return (
-            <Fragment key={`page-group-${page}`}>
+            <Fragment key={`page-group-${visiblePage}`}>
               {shouldShowEllipsis && (
-                <PaginationItem key={`ellipsis-${previousPage}-${page}`}>
+                <PaginationItem key={`ellipsis-${previousPage}-${visiblePage}`}>
                   <PaginationEllipsis />
                 </PaginationItem>
               )}
-              <PaginationItem key={page}>
+              <PaginationItem key={visiblePage}>
                 <PaginationLink
-                  href={createPageLink(page)}
-                  isActive={page === currentPage}
+                  onClick={() => setPage(visiblePage)}
+                  isActive={page === visiblePage}
                 >
-                  {page}
+                  {visiblePage}
                 </PaginationLink>
               </PaginationItem>
             </Fragment>
@@ -78,7 +71,7 @@ export default function MediaPagination(props: PaginationProps) {
 
         {hasNextPage && (
           <PaginationItem>
-            <PaginationNext href={createPageLink(currentPage + 1)} />
+            <PaginationNext onClick={() => setPage(page + 1)} />
           </PaginationItem>
         )}
       </PaginationContent>

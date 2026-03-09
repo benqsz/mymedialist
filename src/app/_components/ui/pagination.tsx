@@ -3,7 +3,6 @@ import {
   CaretRightIcon,
   DotsThreeIcon,
 } from '@phosphor-icons/react'
-import Link, { type LinkProps } from 'next/link'
 import type { ComponentProps } from 'react'
 
 import { cn } from '@/app/_lib/utils'
@@ -37,9 +36,7 @@ function PaginationItem({ ...props }: ComponentProps<'li'>) {
 
 type PaginationLinkProps = {
   isActive?: boolean
-} & Pick<ComponentProps<typeof Button>, 'size'> &
-  ComponentProps<'a'> &
-  LinkProps
+} & ComponentProps<typeof Button>
 
 function PaginationLink({
   className,
@@ -49,25 +46,19 @@ function PaginationLink({
 }: PaginationLinkProps) {
   return (
     <Button
-      asChild
       variant={isActive ? 'outline' : 'ghost'}
       size={size}
       className={cn(className)}
       aria-label={`Go to page ${props.children}`}
-    >
-      <Link
-        aria-current={isActive ? 'page' : undefined}
-        data-slot="pagination-link"
-        data-active={isActive}
-        {...props}
-      />
-    </Button>
+      aria-current={isActive ? 'page' : undefined}
+      data-active={isActive}
+      {...props}
+    />
   )
 }
 
 function PaginationPrevious({
   className,
-  text = 'Previous',
   ...props
 }: ComponentProps<typeof PaginationLink> & { text?: string }) {
   return (
@@ -78,14 +69,12 @@ function PaginationPrevious({
       {...props}
     >
       <CaretLeftIcon data-icon="inline-start" />
-      <span className="hidden sm:block">{text}</span>
     </PaginationLink>
   )
 }
 
 function PaginationNext({
   className,
-  text = 'Next',
   ...props
 }: ComponentProps<typeof PaginationLink> & { text?: string }) {
   return (
@@ -95,7 +84,6 @@ function PaginationNext({
       className={cn('pr-2!', className)}
       {...props}
     >
-      <span className="hidden sm:block">{text}</span>
       <CaretRightIcon data-icon="inline-end" />
     </PaginationLink>
   )
